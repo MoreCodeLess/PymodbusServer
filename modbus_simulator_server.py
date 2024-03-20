@@ -33,6 +33,8 @@ slave5 = ModbusSlaveContext(hr=Bess_Bibl_Inverter3_Phase3)
 
 slaves = {70: slave1, 1: slave2, 12: slave3, 10: slave4, 13: slave5}
 context = ModbusServerContext(slaves=slaves, single=False)
+
+
 async def update_values():
     while True:
         DeviceState = random.choices([random.randint(1, 2), 3, random.randint(
@@ -329,3 +331,15 @@ async def update_values():
         Bess_Bibl_Inverter3_Phase3.setValues(324, LoadOutputEnergy)
 
         await asyncio.sleep(3)
+
+async def main():
+    # Iniciar el servidor Modbus TCP de forma asincrónica
+    server_task = asyncio.create_task(
+        StartAsyncTcpServer(context, address=("127.0.0.1", 502)))
+
+    # Iniciar la tarea de actualización de valores
+    await update_values()
+
+    # Esperar a que el servidor se detenga (esto nunca debería suceder)
+    await server_task
+
