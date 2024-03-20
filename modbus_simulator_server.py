@@ -328,3 +328,4 @@ async def update_values():
         Bess_Bibl_Inverter3_Phase3.setValues(318, LoadOutputActiveMonth)
         Bess_Bibl_Inverter3_Phase3.setValues(324, LoadOutputEnergy)
 
+        await asyncio.sleep(3)
