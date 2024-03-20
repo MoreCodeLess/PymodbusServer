@@ -343,3 +343,6 @@ async def main():
     # Esperar a que el servidor se detenga (esto nunca debería suceder)
     await server_task
 
+if __name__ == "__main__":
+    # Ejecutar el bucle de eventos de asyncio
+    asyncio.run(main())
